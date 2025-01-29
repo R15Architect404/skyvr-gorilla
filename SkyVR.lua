@@ -113,7 +113,7 @@ end
 t:TweenSize(UDim2.new(1,0,1,0),nil,Enum.EasingStyle.Linear,0.1)
 wait(0.06)
 if getgenv().HATDROP and not getgenv().fullbody then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/presidentanvil/skyvr/main/SkyVRHatdrop.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/R15Architect404/skyvr-gorilla/refs/heads/main/SkyVRFullbodyHatdrop.lua"))()
 	TextLabel.Text = "Ready!"
 	task.delay(5,function()
 		loader:Destroy()
@@ -121,7 +121,7 @@ if getgenv().HATDROP and not getgenv().fullbody then
 	return
 end
 if getgenv().fullbody then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/presidentanvil/skyvr/main/SkyVRFullbody.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/R15Architect404/skyvr-gorilla/refs/heads/main/SkyVRFullbody.lua"))()
 	TextLabel.Text = "Ready!"
 	task.delay(5,function()
 		loader:Destroy()
@@ -131,7 +131,7 @@ end
 local plr = game.Players.LocalPlayer
 local input = game:GetService("UserInputService")
 
-local function createpart(size, name,h)
+local function createpart(size, name,h,a)
 	local Part = Instance.new("Part")
 	if h and global.options.outlinesEnabled then 
 		local SelectionBox = Instance.new("SelectionBox")
@@ -144,7 +144,7 @@ local function createpart(size, name,h)
 	Part.Size = size
 	Part.Transparency = 1
 	Part.CanCollide = false
-	Part.Anchored = true
+	Part.Anchored = a or true
 	Part.Name = name
 	return Part
 end

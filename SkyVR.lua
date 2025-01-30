@@ -1,7 +1,7 @@
 
 -- sky vr
 
-
+print("nigga")
 local loader = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local ImageLabel = Instance.new("ImageLabel")

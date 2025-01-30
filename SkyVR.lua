@@ -326,16 +326,7 @@ input.UserCFrameChanged:connect(function(part,move)
 		end
     end)	
 end)
-local CWC = function(toy)
-	local leftDist = (lefthandpart.Position - toy.Position).Magnitude
-	local rightDist = (righthandpart.Position - toy.Position).Magnitude
 
-	if leftDist < rightDist then
-		return "left", leftDist
-	elseif rightDist < leftDist then
-		return "right", rightDist
-	end
-end
 input.InputBegan:connect(function(key)
 	if key.KeyCode == global.options.thirdPersonButtonToggle then
 		thirdperson = not thirdperson -- disabled?
@@ -344,31 +335,18 @@ input.InputBegan:connect(function(key)
 		R1down = true
 	end
     if key.KeyCode == global.options.leftToyBind then
-		local s,n = CWC(lefttoypart)
 		if not lfirst then
 			ltoypos = lefttoypart.CFrame:ToObjectSpace(lefthandpart.CFrame):Inverse()
 		end
 		lfirst = false
-		if n <5 then
-			if s == "left" then
-				righttoyenable = not righttoyenable
-			end
-		end
+        lefttoyenable = not lefttoyenable
     end
 	if key.KeyCode == global.options.rightToyBind then
-			local s,n = CWC(righttoypart)
 		if not rfirst then
 			rtoypos = righttoypart.CFrame:ToObjectSpace(righthandpart.CFrame):Inverse()
 		end
-		
-		
 		rfirst = false
-		if n <5 then
-			if s == "right" then
-				righttoyenable = not righttoyenable
-			end
-			
-		end
+        righttoyenable = not righttoyenable
     end
 end)
 

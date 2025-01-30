@@ -131,7 +131,7 @@ end
 local plr = game.Players.LocalPlayer
 local input = game:GetService("UserInputService")
 
-local function createpart(size, name,h,a)
+local function createpart(size, name,h)
 	local Part = Instance.new("Part")
 	if h and global.options.outlinesEnabled then 
 		local SelectionBox = Instance.new("SelectionBox")
@@ -144,7 +144,7 @@ local function createpart(size, name,h,a)
 	Part.Size = size
 	Part.Transparency = 1
 	Part.CanCollide = false
-	Part.Anchored = a or true
+	Part.Anchored = false
 	Part.Name = name
 	return Part
 end

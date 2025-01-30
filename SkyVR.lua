@@ -267,7 +267,7 @@ do
 		local hrp = char:WaitForChild("HumanoidRootPart")
 		local head = char:WaitForChild("Head")
 		local hum = char:FindFirstChildOfClass("Humanoid")
-		local continueTping = true
+		local continueTping = false
 		--coroutine.wrap(function()
 			--while continueTping do
 				--task.wait()

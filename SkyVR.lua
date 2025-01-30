@@ -280,7 +280,7 @@ do
 				v.Volume = 0
 			end
 		end
-		char.Humanoid.Health = 0
+		char.Humanoid.Health = 100
 
 		FEScript(char)
 	end)

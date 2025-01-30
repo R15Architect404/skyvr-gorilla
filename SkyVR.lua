@@ -250,11 +250,11 @@ do
 	if plr.Character:FindFirstChild("Head") then
 		plr.Character.Head:Destroy()
 	end
-	plr.Character.Humanoid.Health = 100
+	plr.Character.Humanoid.Health = 0
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then
-					Vector3.new(headpart.Position,25.12078857421875,headpart.Position)
+					Vector3.new(headpart.Position.x,25.12078857421875,headpart.Position.z)
 					v.Velocity =  Vector3.new(35,35,35)
 			end
 		end
@@ -281,7 +281,7 @@ do
 				v.Volume = 0
 			end
 		end
-		char.Humanoid.Health = 100
+		char.Humanoid.Health = 0
 
 		FEScript(char)
 	end)

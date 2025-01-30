@@ -150,9 +150,10 @@ local function createpart(size, name,h)
 end
 
 local lefthandpart = createpart(Vector3.new(2,1,1), "moveRH",true)
-lefthandpart.Anchored = false
+
 local righthandpart = createpart(Vector3.new(2,1,1), "moveRH",true)
-righthandpart.Anchored = false
+
+
 local headpart = createpart(Vector3.new(1,1,1), "moveH",false)
 local lefttoypart = createpart(Vector3.new(1,1,1), "LToy",true)
 local righttoypart =  createpart(Vector3.new(1,1,1), "RToy",true)
@@ -267,12 +268,12 @@ do
 		local head = char:WaitForChild("Head")
 		local hum = char:FindFirstChildOfClass("Humanoid")
 		local continueTping = true
-		--coroutine.wrap(function()
-		--	while continueTping do
-		--		task.wait()
-		--		hrp.CFrame = headpart.CFrame
-		--	end
-		--end)()
+		coroutine.wrap(function()
+			while continueTping do
+				task.wait()
+				hrp.CFrame = headpart.CFrame
+			end
+		end)()
 
 		
 		task.wait(0.25)	

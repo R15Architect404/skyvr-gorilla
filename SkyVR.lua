@@ -1,7 +1,7 @@
 
 -- sky vr
 
-print("nigga")
+
 local loader = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local ImageLabel = Instance.new("ImageLabel")
@@ -253,9 +253,8 @@ do
 	plr.Character.Humanoid.Health = 0
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then
-					Vector3.new(headpart.Position.x,25.12078857421875,headpart.Position.z)
-					v.Velocity =  Vector3.new(25,25,25)
+			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
+					v.Velocity = global.options.NetVelocity
 			end
 		end
 	end)
@@ -358,7 +357,6 @@ input.InputEnded:connect(function(key)
 end)
 
 game:GetService("RunService").RenderStepped:connect(function()
-		Vector3.new(headpart.Position,25.12078857421875,headpart.Position)
 	-- righthandpart.CFrame*CFrame.Angles(-math.rad(global.options.righthandrotoffset.X),-math.rad(global.options.righthandrotoffset.Y),math.rad(180-global.options.righthandrotoffset.X))
 	if R1down then
 		cam.CFrame = cam.CFrame:Lerp(cam.CoordinateFrame + (righthandpart.CFrame * CFrame.Angles(math.rad(global.options.controllerRotationOffset.X-global.options.righthandrotoffset.X),math.rad(global.options.controllerRotationOffset.Y-global.options.righthandrotoffset.Y),math.rad(global.options.controllerRotationOffset.Z-global.options.righthandrotoffset.Z))).LookVector * cam.HeadScale/2, 0.5)

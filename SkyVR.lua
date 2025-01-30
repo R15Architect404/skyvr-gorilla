@@ -113,7 +113,7 @@ end
 t:TweenSize(UDim2.new(1,0,1,0),nil,Enum.EasingStyle.Linear,0.1)
 wait(0.06)
 if getgenv().HATDROP and not getgenv().fullbody then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/R15Architect404/skyvr-gorilla/refs/heads/main/SkyVRFullbodyHatdrop.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/presidentanvil/skyvr/main/SkyVRHatdrop.lua"))()
 	TextLabel.Text = "Ready!"
 	task.delay(5,function()
 		loader:Destroy()
@@ -121,7 +121,7 @@ if getgenv().HATDROP and not getgenv().fullbody then
 	return
 end
 if getgenv().fullbody then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/R15Architect404/skyvr-gorilla/refs/heads/main/SkyVRFullbody.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/presidentanvil/skyvr/main/SkyVRFullbody.lua"))()
 	TextLabel.Text = "Ready!"
 	task.delay(5,function()
 		loader:Destroy()
@@ -144,7 +144,7 @@ local function createpart(size, name,h)
 	Part.Size = size
 	Part.Transparency = 1
 	Part.CanCollide = false
-	Part.Anchored = false
+	Part.Anchored = true
 	Part.Name = name
 	return Part
 end
@@ -155,7 +155,7 @@ local headpart = createpart(Vector3.new(1,1,1), "moveH",false)
 local lefttoypart = createpart(Vector3.new(1,1,1), "LToy",true)
 local righttoypart =  createpart(Vector3.new(1,1,1), "RToy",true)
 local thirdpersonpart = createpart(Vector3.new(1,1,1), "thirdpersonpart",false)
-local thirdperson = true
+local thirdperson = false
 local lefttoyenable = false
 local righttoyenable = false
 local lfirst = true
@@ -357,11 +357,9 @@ input.InputEnded:connect(function(key)
 end)
 
 game:GetService("RunService").RenderStepped:connect(function()
-		
+		Vector3.new(headpart.Position,25.12078857421875,headpart.Position)
 	-- righthandpart.CFrame*CFrame.Angles(-math.rad(global.options.righthandrotoffset.X),-math.rad(global.options.righthandrotoffset.Y),math.rad(180-global.options.righthandrotoffset.X))
 	if R1down then
 		cam.CFrame = cam.CFrame:Lerp(cam.CoordinateFrame + (righthandpart.CFrame * CFrame.Angles(math.rad(global.options.controllerRotationOffset.X-global.options.righthandrotoffset.X),math.rad(global.options.controllerRotationOffset.Y-global.options.righthandrotoffset.Y),math.rad(global.options.controllerRotationOffset.Z-global.options.righthandrotoffset.Z))).LookVector * cam.HeadScale/2, 0.5)
 	end
-		
-		print("dildo")
 end)

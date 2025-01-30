@@ -315,14 +315,10 @@ input.UserCFrameChanged:connect(function(part,move)
 			thirdpersonpart.CFrame = cam.CFrame * (CFrame.new(move.p*(cam.HeadScale-1))*move) * CFrame.new(0,0,-10) * CFrame.Angles(math.rad(180),0,math.rad(180))
     	elseif part == Enum.UserCFrame.LeftHand then
     		lefthandpart.CFrame = cam.CFrame*(CFrame.new(move.p*(cam.HeadScale-1))*move*CFrame.Angles(math.rad(global.options.lefthandrotoffset.X),math.rad(global.options.lefthandrotoffset.Y),math.rad(global.options.lefthandrotoffset.Z)))
-    	    if lefttoyenable then
-                lefttoypart.CFrame = lefthandpart.CFrame * ltoypos
-            end
+    	   
         elseif part == Enum.UserCFrame.RightHand then
     		righthandpart.CFrame = cam.CFrame*(CFrame.new(move.p*(cam.HeadScale-1))*move*CFrame.Angles(math.rad(global.options.righthandrotoffset.X),math.rad(global.options.righthandrotoffset.Y),math.rad(global.options.righthandrotoffset.Z)))
-    	    if righttoyenable then
-                righttoypart.CFrame = righthandpart.CFrame * rtoypos
-            end
+    	    
 		end
     end)	
 end)
@@ -355,9 +351,25 @@ input.InputEnded:connect(function(key)
 		R1down = false
 	end
 end)
-
+local function grabToy(handPart, toyPart, toyPos)
+    toyPart.CFrame = handPart.CFrame * toyPos
+end
 game:GetService("RunService").RenderStepped:connect(function()
-	-- righthandpart.CFrame*CFrame.Angles(-math.rad(global.options.righthandrotoffset.X),-math.rad(global.options.righthandrotoffset.Y),math.rad(180-global.options.righthandrotoffset.X))
+	 if (leftHandPart.Position - leftToyPart.Position).magnitude < 2 then
+        -- If the left hand is close enough to the left toy
+        grabToy(leftHandPart, leftToyPart, ltoypos)
+    elseif (leftHandPart.Position - rightToyPart.Position).magnitude < 2 then
+        -- If the left hand is close enough to the right toy
+        grabToy(leftHandPart, rightToyPart, ltoypos)
+    end
+    
+    if (rightHandPart.Position - leftToyPart.Position).magnitude < 2 then
+        -- If the right hand is close enough to the left toy
+        grabToy(rightHandPart, leftToyPart, ltoypos)
+    elseif (rightHandPart.Position - rightToyPart.Position).magnitude < 2 then
+        -- If the right hand is close enough to the right toy
+        grabToy(rightHandPart, rightToyPart, ltoypos)
+    end
 	if R1down then
 		cam.CFrame = cam.CFrame:Lerp(cam.CoordinateFrame + (righthandpart.CFrame * CFrame.Angles(math.rad(global.options.controllerRotationOffset.X-global.options.righthandrotoffset.X),math.rad(global.options.controllerRotationOffset.Y-global.options.righthandrotoffset.Y),math.rad(global.options.controllerRotationOffset.Z-global.options.righthandrotoffset.Z))).LookVector * cam.HeadScale/2, 0.5)
 	end

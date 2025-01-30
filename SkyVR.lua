@@ -255,7 +255,7 @@ do
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then
 					Vector3.new(headpart.Position.x,25.12078857421875,headpart.Position.z)
-					v.Velocity =  Vector3.new(35,35,35)
+					v.Velocity =  Vector3.new(25,25,25)
 			end
 		end
 	end)

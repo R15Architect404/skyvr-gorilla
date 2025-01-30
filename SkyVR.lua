@@ -254,7 +254,7 @@ do
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
-					v.Velocity = global.options.NetVelocity
+					v.Velocity = 0
 			end
 		end
 	end)

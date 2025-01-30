@@ -253,8 +253,9 @@ do
 	plr.Character.Humanoid.Health = 100
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
-					v.Velocity = 0
+			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then
+					Vector3.new(headpart.Position,25.12078857421875,headpart.Position)
+					v.Velocity = 35,35,35
 			end
 		end
 	end)

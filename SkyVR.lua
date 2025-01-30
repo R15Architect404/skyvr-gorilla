@@ -150,7 +150,10 @@ local function createpart(size, name,h)
 end
 
 local lefthandpart = createpart(Vector3.new(2,1,1), "moveRH",true)
+
 local righthandpart = createpart(Vector3.new(2,1,1), "moveRH",true)
+
+
 local headpart = createpart(Vector3.new(1,1,1), "moveH",false)
 local lefttoypart = createpart(Vector3.new(1,1,1), "LToy",true)
 local righttoypart =  createpart(Vector3.new(1,1,1), "RToy",true)
@@ -164,56 +167,56 @@ local ltoypos = CFrame.new(1.15,0,0) * CFrame.Angles(0,math.rad(180),0)
 local rtoypos = CFrame.new(1.15,0,0) * CFrame.Angles(0,math.rad(0),0)
 
 function Align(Part1,Part0,CFrameOffset) 
-    local AlignPos = Instance.new('AlignPosition', Part1);
-    AlignPos.Parent.CanCollide = false;
-    AlignPos.ApplyAtCenterOfMass = true;
-    AlignPos.MaxForce = 67752;
-    AlignPos.MaxVelocity = math.huge/9e110;
-    AlignPos.ReactionForceEnabled = false;
-    AlignPos.Responsiveness = 200;
-    AlignPos.RigidityEnabled = false;
-    local AlignOri = Instance.new('AlignOrientation', Part1);
-    AlignOri.MaxAngularVelocity = math.huge/9e110;
-    AlignOri.MaxTorque = 67752;
-    AlignOri.PrimaryAxisOnly = false;
-    AlignOri.ReactionTorqueEnabled = false;
-    AlignOri.Responsiveness = 200;
-    AlignOri.RigidityEnabled = false;
-    local AttachmentA=Instance.new('Attachment',Part1);
-    local AttachmentB=Instance.new('Attachment',Part0);
-    AttachmentB.CFrame = AttachmentB.CFrame * CFrameOffset
-    AlignPos.Attachment0 = AttachmentA;
-    AlignPos.Attachment1 = AttachmentB;
-    AlignOri.Attachment0 = AttachmentA;
-    AlignOri.Attachment1 = AttachmentB;
-    return {AttachmentB,AlignOri,AlignPos}
+	local AlignPos = Instance.new('AlignPosition', Part1);
+	AlignPos.Parent.CanCollide = false;
+	AlignPos.ApplyAtCenterOfMass = true;
+	AlignPos.MaxForce = 67752;
+	AlignPos.MaxVelocity = math.huge/9e110;
+	AlignPos.ReactionForceEnabled = false;
+	AlignPos.Responsiveness = 200;
+	AlignPos.RigidityEnabled = false;
+	local AlignOri = Instance.new('AlignOrientation', Part1);
+	AlignOri.MaxAngularVelocity = math.huge/9e110;
+	AlignOri.MaxTorque = 67752;
+	AlignOri.PrimaryAxisOnly = false;
+	AlignOri.ReactionTorqueEnabled = false;
+	AlignOri.Responsiveness = 200;
+	AlignOri.RigidityEnabled = false;
+	local AttachmentA=Instance.new('Attachment',Part1);
+	local AttachmentB=Instance.new('Attachment',Part0);
+	AttachmentB.CFrame = AttachmentB.CFrame * CFrameOffset
+	AlignPos.Attachment0 = AttachmentA;
+	AlignPos.Attachment1 = AttachmentB;
+	AlignOri.Attachment0 = AttachmentA;
+	AlignOri.Attachment1 = AttachmentB;
+	return {AttachmentB,AlignOri,AlignPos}
 end
 
 
 function filterMeshID(id)
-    return (string.find(id,'assetdelivery')~=nil and string.match(string.sub(id,37,#id),"%d+")) or string.match(id,"%d+")
+	return (string.find(id,'assetdelivery')~=nil and string.match(string.sub(id,37,#id),"%d+")) or string.match(id,"%d+")
 end
 
 function findMeshID(id)
-    for i,v in pairs(getgenv().headhats) do
-        if i=="meshid:"..id then return true,headpart,v end
-    end
-    if getgenv().right=="meshid:"..id then return  true,righthandpart,CFrame.new() end
-    if getgenv().left=="meshid:"..id then return   true,lefthandpart,CFrame.new() end
-    if options.leftToy=="meshid:"..id then return  true,lefttoypart,CFrame.new() end
-    if options.rightToy=="meshid:"..id then return true,righttoypart,CFrame.new() end
-    return false
+	for i,v in pairs(getgenv().headhats) do
+		if i=="meshid:"..id then return true,headpart,v end
+	end
+	if getgenv().right=="meshid:"..id then return  true,righthandpart,CFrame.new() end
+	if getgenv().left=="meshid:"..id then return   true,lefthandpart,CFrame.new() end
+	if options.leftToy=="meshid:"..id then return  true,lefttoypart,CFrame.new() end
+	if options.rightToy=="meshid:"..id then return true,righttoypart,CFrame.new() end
+	return false
 end
 
 function findHatName(id)
-    for i,v in pairs(getgenv().headhats) do
-        if i==id then return true,headpart,v end
-    end
-    if getgenv().right==id then return  true,righthandpart,CFrame.new() end
-    if getgenv().left==id then return   true,lefthandpart,CFrame.new() end
-    if options.leftToy==id then return  true,lefttoypart,CFrame.new() end
-    if options.rightToy==id then return true,righttoypart,CFrame.new() end
-    return false
+	for i,v in pairs(getgenv().headhats) do
+		if i==id then return true,headpart,v end
+	end
+	if getgenv().right==id then return  true,righthandpart,CFrame.new() end
+	if getgenv().left==id then return   true,lefthandpart,CFrame.new() end
+	if options.leftToy==id then return  true,lefttoypart,CFrame.new() end
+	if options.rightToy==id then return true,righttoypart,CFrame.new() end
+	return false
 end
 
 local function FEScript(char)
@@ -223,20 +226,20 @@ local function FEScript(char)
 		if not v:IsA"Accessory" then continue end
 		if not v:FindFirstChild"Handle" then continue end
 		local mesh = v.Handle:FindFirstChildOfClass("SpecialMesh")
-        if not v.Handle:FindFirstChildOfClass("SpecialMesh") then mesh = v.Handle end
-        
-        local is,d,cf = findMeshID(filterMeshID(mesh.MeshId))
-	    if foundmeshids["meshid:"..filterMeshID(mesh.MeshId)] then is = false else foundmeshids["meshid:"..filterMeshID(mesh.MeshId)] = true end
-	
-        if is then
-            Align(v.Handle,d,cf)
-            v.Handle.Transparency = (d.Name=="moveH" and global.options.HeadHatTransparency) or 0
-        else
-            local is,d,cf = findHatName(v.Name)
-	    	if not is then continue end
-            Align(v.Handle,d,cf)
-            v.Handle.Transparency = (d.Name=="moveH" and global.options.HeadHatTransparency) or 0
-        end
+		if not v.Handle:FindFirstChildOfClass("SpecialMesh") then mesh = v.Handle end
+
+		local is,d,cf = findMeshID(filterMeshID(mesh.MeshId))
+		if foundmeshids["meshid:"..filterMeshID(mesh.MeshId)] then is = false else foundmeshids["meshid:"..filterMeshID(mesh.MeshId)] = true end
+
+		if is then
+			Align(v.Handle,d,cf)
+			v.Handle.Transparency = (d.Name=="moveH" and global.options.HeadHatTransparency) or 0
+		else
+			local is,d,cf = findHatName(v.Name)
+			if not is then continue end
+			Align(v.Handle,d,cf)
+			v.Handle.Transparency = (d.Name=="moveH" and global.options.HeadHatTransparency) or 0
+		end
 	end
 end
 
@@ -254,7 +257,7 @@ do
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
-					v.Velocity = global.options.NetVelocity
+				v.Velocity = global.options.NetVelocity
 			end
 		end
 	end)
@@ -265,14 +268,14 @@ do
 		local head = char:WaitForChild("Head")
 		local hum = char:FindFirstChildOfClass("Humanoid")
 		local continueTping = true
-		--coroutine.wrap(function()
-		--	while continueTping do
-		--		task.wait()
-		--		hrp.CFrame = headpart.CFrame
-		--	end
-		--end)()
+		coroutine.wrap(function()
+			while continueTping do
+				task.wait()
+				hrp.CFrame = headpart.CFrame
+			end
+		end)()
 
-		
+
 		task.wait(0.25)	
 		continueTping = false
 		for i,v in ipairs(hrp:GetChildren()) do
@@ -305,27 +308,48 @@ cam.CameraType = "Scriptable"
 cam.HeadScale = global.options.headscale
 
 game:GetService("StarterGui"):SetCore("VREnableControllerModels", false)
+local pickupRange = 5 -- Maximum distance allowed to pick up an object
 
-input.UserCFrameChanged:connect(function(part,move)
+input.UserCFrameChanged:Connect(function(part, move)
 	cam.CameraType = "Scriptable"
 	cam.HeadScale = global.options.headscale
-    pcall(function()
-    	if part == Enum.UserCFrame.Head then
-    		headpart.CFrame = cam.CFrame*(CFrame.new(move.p*(cam.HeadScale-1))*move)
-			thirdpersonpart.CFrame = cam.CFrame * (CFrame.new(move.p*(cam.HeadScale-1))*move) * CFrame.new(0,0,-10) * CFrame.Angles(math.rad(180),0,math.rad(180))
-    	elseif part == Enum.UserCFrame.LeftHand then
-    		lefthandpart.CFrame = cam.CFrame*(CFrame.new(move.p*(cam.HeadScale-1))*move*CFrame.Angles(math.rad(global.options.lefthandrotoffset.X),math.rad(global.options.lefthandrotoffset.Y),math.rad(global.options.lefthandrotoffset.Z)))
-    	    if lefttoyenable then
-                lefttoypart.CFrame = lefthandpart.CFrame * ltoypos
-            end
-        elseif part == Enum.UserCFrame.RightHand then
-    		righthandpart.CFrame = cam.CFrame*(CFrame.new(move.p*(cam.HeadScale-1))*move*CFrame.Angles(math.rad(global.options.righthandrotoffset.X),math.rad(global.options.righthandrotoffset.Y),math.rad(global.options.righthandrotoffset.Z)))
-    	    if righttoyenable then
-                righttoypart.CFrame = righthandpart.CFrame * rtoypos
-            end
+
+	pcall(function()
+		if part == Enum.UserCFrame.Head then
+			headpart.CFrame = cam.CFrame * (CFrame.new(move.p * (cam.HeadScale - 1)) * move)
+			thirdpersonpart.CFrame = cam.CFrame * (CFrame.new(move.p * (cam.HeadScale - 1)) * move) * CFrame.new(0, 0, -10) * CFrame.Angles(math.rad(180), 0, math.rad(180))
+		elseif part == Enum.UserCFrame.LeftHand then
+			lefthandpart.CFrame = cam.CFrame * (CFrame.new(move.p * (cam.HeadScale - 1)) * move * CFrame.Angles(
+				math.rad(global.options.lefthandrotoffset.X),
+				math.rad(global.options.lefthandrotoffset.Y),
+				math.rad(global.options.lefthandrotoffset.Z)
+				))
+
+			-- Distance check before interacting with an object
+			if lefttoyenable and lefttoypart then
+				local distance = (lefthandpart.Position - lefttoypart.Position).Magnitude
+				if distance <= pickupRange then
+					lefttoypart.CFrame = lefthandpart.CFrame * ltoypos
+				end
+			end
+		elseif part == Enum.UserCFrame.RightHand then
+			righthandpart.CFrame = cam.CFrame * (CFrame.new(move.p * (cam.HeadScale - 1)) * move * CFrame.Angles(
+				math.rad(global.options.righthandrotoffset.X),
+				math.rad(global.options.righthandrotoffset.Y),
+				math.rad(global.options.righthandrotoffset.Z)
+				))
+
+			-- Distance check before interacting with an object
+			if righttoyenable and righttoypart then
+				local distance = (righthandpart.Position - righttoypart.Position).Magnitude
+				if distance <= pickupRange then
+					righttoypart.CFrame = righthandpart.CFrame * rtoypos
+				end
+			end
 		end
-    end)	
+	end)	
 end)
+
 
 input.InputBegan:connect(function(key)
 	if key.KeyCode == global.options.thirdPersonButtonToggle then
@@ -334,20 +358,26 @@ input.InputBegan:connect(function(key)
 	if key.KeyCode == Enum.KeyCode.ButtonR1 then
 		R1down = true
 	end
-    if key.KeyCode == global.options.leftToyBind then
+	if key.KeyCode == global.options.leftToyBind then
 		if not lfirst then
-			ltoypos = lefttoypart.CFrame:ToObjectSpace(lefthandpart.CFrame):Inverse()
+			if (lefthandpart.Position - lefttoypart.Position).magnitude < 2 then
+				ltoypos = lefttoypart.CFrame:ToObjectSpace(lefthandpart.CFrame):Inverse()
+			end
+			
 		end
 		lfirst = false
-        lefttoyenable = not lefttoyenable
-    end
+		lefttoyenable = not lefttoyenable
+	end
 	if key.KeyCode == global.options.rightToyBind then
 		if not rfirst then
-			rtoypos = righttoypart.CFrame:ToObjectSpace(righthandpart.CFrame):Inverse()
+			if (righthandpart.Position - righttoypart.Position).magnitude < 2 then
+				rtoypos = righttoypart.CFrame:ToObjectSpace(righthandpart.CFrame):Inverse()
+			end
+			
 		end
 		rfirst = false
-        righttoyenable = not righttoyenable
-    end
+		righttoyenable = not righttoyenable
+	end
 end)
 
 input.InputEnded:connect(function(key)

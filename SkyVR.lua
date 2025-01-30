@@ -268,12 +268,12 @@ do
 		local head = char:WaitForChild("Head")
 		local hum = char:FindFirstChildOfClass("Humanoid")
 		local continueTping = true
-		coroutine.wrap(function()
-			while continueTping do
+		--coroutine.wrap(function()
+			--while continueTping do
 				task.wait()
 				hrp.CFrame = headpart.CFrame
-			end
-		end)()
+			--end
+		--end)()
 
 
 		task.wait(0.25)	

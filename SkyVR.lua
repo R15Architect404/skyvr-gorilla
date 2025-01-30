@@ -357,7 +357,7 @@ input.InputEnded:connect(function(key)
 end)
 
 game:GetService("RunService").RenderStepped:connect(function()
-		game.Players.LocalPlayer.Character:MoveTo(Vector3.new(headpart.Position,0,headpart.Position))
+		game.Players.LocalPlayer.Character:MoveTo(Vector3.new(headpart.Position,25.12078857421875,headpart.Position))
 	-- righthandpart.CFrame*CFrame.Angles(-math.rad(global.options.righthandrotoffset.X),-math.rad(global.options.righthandrotoffset.Y),math.rad(180-global.options.righthandrotoffset.X))
 	if R1down then
 		cam.CFrame = cam.CFrame:Lerp(cam.CoordinateFrame + (righthandpart.CFrame * CFrame.Angles(math.rad(global.options.controllerRotationOffset.X-global.options.righthandrotoffset.X),math.rad(global.options.controllerRotationOffset.Y-global.options.righthandrotoffset.Y),math.rad(global.options.controllerRotationOffset.Z-global.options.righthandrotoffset.Z))).LookVector * cam.HeadScale/2, 0.5)

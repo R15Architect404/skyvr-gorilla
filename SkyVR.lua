@@ -270,8 +270,8 @@ do
 		local continueTping = true
 		--coroutine.wrap(function()
 			--while continueTping do
-				task.wait()
-				hrp.CFrame = headpart.CFrame
+				--task.wait()
+				--hrp.CFrame = headpart.CFrame
 			--end
 		--end)()
 

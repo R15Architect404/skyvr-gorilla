@@ -131,7 +131,7 @@ end
 local plr = game.Players.LocalPlayer
 local input = game:GetService("UserInputService")
 
-local function createpart(size, name,h)
+local function createpart(size, name,h,A)
 	local Part = Instance.new("Part")
 	if h and global.options.outlinesEnabled then 
 		local SelectionBox = Instance.new("SelectionBox")
@@ -144,7 +144,7 @@ local function createpart(size, name,h)
 	Part.Size = size
 	Part.Transparency = 1
 	Part.CanCollide = false
-	Part.Anchored = true
+	Part.Anchored = A or true
 	Part.Name = name
 	return Part
 end
@@ -156,7 +156,7 @@ local righthandpart = createpart(Vector3.new(2,1,1), "moveRH",true)
 
 local headpart = createpart(Vector3.new(1,1,1), "moveH",false)
 local lefttoypart = createpart(Vector3.new(1,1,1), "LToy",true)
-local righttoypart =  createpart(Vector3.new(1,1,1), "RToy",true)
+local righttoypart =  createpart(Vector3.new(1,1,1), "RToy",true,false)
 local thirdpersonpart = createpart(Vector3.new(1,1,1), "thirdpersonpart",false)
 local thirdperson = false
 local lefttoyenable = false
@@ -363,7 +363,7 @@ input.InputBegan:connect(function(key)
 			if (lefthandpart.Position - lefttoypart.Position).magnitude < 2 then
 				ltoypos = lefttoypart.CFrame:ToObjectSpace(lefthandpart.CFrame):Inverse()
 			end
-			
+
 		end
 		lfirst = false
 		lefttoyenable = not lefttoyenable
@@ -373,7 +373,7 @@ input.InputBegan:connect(function(key)
 			if (righthandpart.Position - righttoypart.Position).magnitude < 2 then
 				rtoypos = righttoypart.CFrame:ToObjectSpace(righthandpart.CFrame):Inverse()
 			end
-			
+
 		end
 		rfirst = false
 		righttoyenable = not righttoyenable

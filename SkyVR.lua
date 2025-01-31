@@ -309,6 +309,8 @@ cam.HeadScale = global.options.headscale
 
 game:GetService("StarterGui"):SetCore("VREnableControllerModels", false)
 local pickupRange = 5 -- Maximum distance allowed to pick up an object
+local leftHolding = false
+local rightHolding = false
 
 input.UserCFrameChanged:Connect(function(part, move)
 	cam.CameraType = "Scriptable"
@@ -325,11 +327,18 @@ input.UserCFrameChanged:Connect(function(part, move)
 				math.rad(global.options.lefthandrotoffset.Z)
 				))
 
-			-- Distance check before interacting with an object
 			if lefttoyenable and lefttoypart then
 				local distance = (lefthandpart.Position - lefttoypart.Position).Magnitude
 				if distance <= pickupRange then
 					lefttoypart.CFrame = lefthandpart.CFrame * ltoypos
+					lefttoypart.Anchored = true
+					leftHolding = true
+				else
+					if leftHolding then
+						leftHolding = false
+						lefttoypart.Anchored = false
+						lefttoypart.AssemblyLinearVelocity = lefthandpart.AssemblyLinearVelocity -- Keeps momentum
+					end
 				end
 			end
 		elseif part == Enum.UserCFrame.RightHand then
@@ -339,11 +348,18 @@ input.UserCFrameChanged:Connect(function(part, move)
 				math.rad(global.options.righthandrotoffset.Z)
 				))
 
-			-- Distance check before interacting with an object
 			if righttoyenable and righttoypart then
 				local distance = (righthandpart.Position - righttoypart.Position).Magnitude
 				if distance <= pickupRange then
 					righttoypart.CFrame = righthandpart.CFrame * rtoypos
+					righttoypart.Anchored = true
+					rightHolding = true
+				else
+					if rightHolding then
+						rightHolding = false
+						righttoypart.Anchored = false
+						righttoypart.AssemblyLinearVelocity = righthandpart.AssemblyLinearVelocity -- Keeps momentum
+					end
 				end
 			end
 		end

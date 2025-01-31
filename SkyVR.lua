@@ -353,7 +353,7 @@ end)
 
 
 input.InputBegan:connect(function(key)
-	if key.KeyCode == global.options.thirdPersonButtonToggle then
+	if key.KeyCode ==key.KeyCode.Y then
 		thirdperson = not thirdperson -- disabled?
 	end
 	if key.KeyCode == Enum.KeyCode.ButtonR1 then

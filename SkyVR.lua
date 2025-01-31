@@ -144,7 +144,7 @@ local function createpart(size, name,h,A)
 	Part.Size = size
 	Part.Transparency = 1
 	Part.CanCollide = false
-	Part.Anchored = A or true
+	Part.Anchored = true
 	Part.Name = name
 	return Part
 end

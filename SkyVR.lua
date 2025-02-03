@@ -249,7 +249,7 @@ do
 		plr.Character.Head:Destroy()
 	end
 	
-	char.Humanoid.Health = 0
+	plr.Character.Humanoid.Health = 0
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 

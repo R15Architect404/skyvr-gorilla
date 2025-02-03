@@ -249,7 +249,15 @@ do
 		plr.Character.Head:Destroy()
 	end
 	
-	plr.Character.Humanoid.Health = 0
+	if plr.Character and plr.Character:FindFirstChild("Humanoid") then
+    plr.Character.Humanoid.Health = 0
+else
+    plr.CharacterAdded:Wait() -- Wait for character to load
+    local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.Health = 0
+    end
+end
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 

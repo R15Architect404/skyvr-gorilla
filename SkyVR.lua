@@ -245,8 +245,10 @@ do
 		end
 	end
 	if plr.Character:FindFirstChild("Head") then
-		
+		wait(5)
+		plr.Character.Head:Destroy()
 	end
+	
 	plr.Character.Humanoid.Health = 0
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
@@ -277,6 +279,8 @@ do
 				v.Volume = 0
 			end
 		end
+			wait(5)
+			char.Humanoid.Health = 0
 		
 
 		FEScript(char)

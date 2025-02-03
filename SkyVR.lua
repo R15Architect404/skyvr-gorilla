@@ -280,7 +280,7 @@ end
 		end)()
 
 
-		task.wait(0.01)	
+		task.wait(0.25)	
 		continueTping = false
 		for i,v in ipairs(hrp:GetChildren()) do
 			if v:IsA("Sound") then

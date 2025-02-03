@@ -277,7 +277,7 @@ do
 				v.Volume = 0
 			end
 		end
-		char.Humanoid.Health = 0
+		
 
 		FEScript(char)
 	end)
@@ -310,6 +310,7 @@ input.UserCFrameChanged:Connect(function(part, move)
 
 	pcall(function()
 		if part == Enum.UserCFrame.Head then
+					
 			headpart.CFrame = cam.CFrame * (CFrame.new(move.p * (cam.HeadScale - 1)) * move)
 			thirdpersonpart.CFrame = cam.CFrame * (CFrame.new(move.p * (cam.HeadScale - 1)) * move) * CFrame.new(0, 0, -10) * CFrame.Angles(math.rad(180), 0, math.rad(180))
 		elseif part == Enum.UserCFrame.LeftHand then

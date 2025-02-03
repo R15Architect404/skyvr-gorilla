@@ -249,7 +249,7 @@ do
 		plr.Character.Head:Destroy()
 	end
 	
-	plr.Character.Humanoid.Health = 0
+	
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
@@ -266,7 +266,7 @@ do
 		local continueTping = true
 		coroutine.wrap(function()
 			while continueTping do
-				task.wait()
+				task.wait(5)
 				hrp.CFrame = headpart.CFrame
 			end
 		end)()

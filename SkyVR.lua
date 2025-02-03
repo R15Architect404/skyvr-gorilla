@@ -249,7 +249,7 @@ do
 		plr.Character.Head:Destroy()
 	end
 	
-	
+	char.Humanoid.Health = 0
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
@@ -300,6 +300,7 @@ coroutine.wrap(function()
 		cam.HeadScale = global.options.headscale
 	end)
 end)()
+
 local cam = workspace.CurrentCamera
 
 cam.CameraType = "Scriptable"

@@ -245,7 +245,7 @@ do
 		end
 	end
 	if plr.Character:FindFirstChild("Head") then
-		wait(5)
+		
 		plr.Character.Head:Destroy()
 	end
 	
@@ -266,7 +266,7 @@ do
 		local continueTping = true
 		coroutine.wrap(function()
 			while continueTping do
-				task.wait(5)
+				task.wait()
 				hrp.CFrame = headpart.CFrame
 			end
 		end)()
@@ -279,7 +279,7 @@ do
 				v.Volume = 0
 			end
 		end
-			wait(5)
+			
 			char.Humanoid.Health = 0
 		
 

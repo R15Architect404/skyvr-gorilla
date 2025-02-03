@@ -95,13 +95,7 @@ t:TweenSize(UDim2.new(0,0,1,0),nil,Enum.EasingStyle.Linear,0)
 wait(0.01)
 t:TweenSize(UDim2.new(0.3,0,1,0),nil,Enum.EasingStyle.Linear,0.8)
 wait(0.81)
-if not game:GetService("UserInputService").VREnabled and not getgenv().fullbody then
-	errorr.Visible = true
-	t.Parent.Visible = false
-	wait(5)
-	loader:Destroy()
-	return
-end
+
 if getgenv().skyVRversion ~= '3.0.0' then
 	errorr.Text = "Please update your script loader!"
 	errorr.Visible = true
@@ -251,7 +245,7 @@ do
 		end
 	end
 	if plr.Character:FindFirstChild("Head") then
-		plr.Character.Head:Destroy()
+		
 	end
 	plr.Character.Humanoid.Health = 0
 	game:GetService("RunService").PostSimulation:connect(function()

@@ -211,7 +211,7 @@ function findMeshID(id)
 	if options.leftToy2=="meshid:"..id then return  true,lefttoypart2,CFrame.new() end
 	if options.rightToy=="meshid:"..id then return true,righttoypart,CFrame.new() end
 	if options.rightToy2=="meshid:"..id then return true,righttoypart2,CFrame.new() end
-	
+
 	return false
 end
 
@@ -225,7 +225,7 @@ function findHatName(id)
 	if options.rightToy==id then return true,righttoypart,CFrame.new() end
 	if options.leftToy2==id then return  true,lefttoypart2,CFrame.new() end
 	if options.rightToy2==id then return true,righttoypart2,CFrame.new() end
-	
+
 	return false
 end
 
@@ -348,7 +348,7 @@ input.UserCFrameChanged:Connect(function(part, move)
 				math.rad(global.options.lefthandrotoffset.Y),
 				math.rad(global.options.lefthandrotoffset.Z)
 				))
-			
+
 
 			-- Distance check before interacting with an object
 			if lefttoyenable and lefttoypart then
@@ -414,7 +414,7 @@ input.InputBegan:connect(function(key)
 
 		end
 		lfirst = false
-		lefttoyenable = not lefttoyenable
+		lefttoyenable2 = not lefttoyenable2
 	end
 	if key.KeyCode == global.options.rightToyBind then
 		if not rfirst then

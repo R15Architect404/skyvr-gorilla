@@ -413,7 +413,7 @@ input.InputBegan:connect(function(key)
 			end
 
 		end
-		lfirst = false
+		lfirst2 = false
 		lefttoyenable2 = not lefttoyenable2
 	end
 	if key.KeyCode == global.options.rightToyBind then

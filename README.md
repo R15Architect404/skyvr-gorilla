@@ -1,4 +1,4 @@
-made with <3, by presidentanvil || https://skyvr.loadlua.xyz
+this is not made by me its a edited version of https://github.com/PresidentAnvil/skyvr
 
 ```lua
 -- DO NOT RUN THIS IN VR MODE

@@ -149,16 +149,25 @@ local righthandpart = createpart(Vector3.new(2,1,1), "moveRH",true)
 
 
 local headpart = createpart(Vector3.new(1,1,1), "moveH",false)
-local lefttoypart = createpart(Vector3.new(1,1,1), "LToy",true)
-local righttoypart =  createpart(Vector3.new(1,1,1), "RToy",true,false)
+local lefttoypart = createpart(Vector3.new(1,1,1), "LToy1", true)
+local righttoypart = createpart(Vector3.new(1,1,1), "RToy1", true)
+local lefttoypart2 = createpart(Vector3.new(1,1,1), "LToy2", true)
+local righttoypart2 = createpart(Vector3.new(1,1,1), "RToy2", true)
 local thirdpersonpart = createpart(Vector3.new(1,1,1), "thirdpersonpart",false)
 local thirdperson = false
 local lefttoyenable = false
 local righttoyenable = false
+local lefttoyenable2= false
+local righttoyenable2 = false
 local lfirst = true
 local rfirst = true
-local ltoypos = CFrame.new(1.15,0,0) * CFrame.Angles(0,math.rad(180),0)
-local rtoypos = CFrame.new(1.15,0,0) * CFrame.Angles(0,math.rad(0),0)
+local lfirst2 = true
+local rfirst2 = true
+local ltoypos1 = CFrame.new(1.15, 0, 0) * CFrame.Angles(0, math.rad(180), 0)
+local rtoypos1 = CFrame.new(1.15, 0, 0) * CFrame.Angles(0, math.rad(0), 0)
+local ltoypos2 = CFrame.new(-1.15, 0, 0) * CFrame.Angles(0, math.rad(180), 0)
+local rtoypos2 = CFrame.new(-1.15, 0, 0) * CFrame.Angles(0, math.rad(0), 0)
+
 
 function Align(Part1,Part0,CFrameOffset) 
 	local AlignPos = Instance.new('AlignPosition', Part1);
@@ -198,7 +207,10 @@ function findMeshID(id)
 	if getgenv().right=="meshid:"..id then return  true,righthandpart,CFrame.new() end
 	if getgenv().left=="meshid:"..id then return   true,lefthandpart,CFrame.new() end
 	if options.leftToy=="meshid:"..id then return  true,lefttoypart,CFrame.new() end
+	if options.leftToy2=="meshid:"..id then return  true,lefttoypart2,CFrame.new() end
 	if options.rightToy=="meshid:"..id then return true,righttoypart,CFrame.new() end
+	if options.rightToy2=="meshid:"..id then return true,righttoypart2,CFrame.new() end
+	
 	return false
 end
 
@@ -209,7 +221,10 @@ function findHatName(id)
 	if getgenv().right==id then return  true,righthandpart,CFrame.new() end
 	if getgenv().left==id then return   true,lefthandpart,CFrame.new() end
 	if options.leftToy==id then return  true,lefttoypart,CFrame.new() end
-	if options.rightToy==id then return true,righttoypart,CFrame.new() end
+	if options.rightToy==id then return true,righttoypart,CFrame.new() 
+	if options.leftToy2==id then return  true,lefttoypart2,CFrame.new() end
+	if options.rightToy2==id then return true,righttoypart2,CFrame.new() end
+	
 	return false
 end
 
@@ -245,19 +260,19 @@ do
 		end
 	end
 	if plr.Character:FindFirstChild("Head") then
-		
+
 		plr.Character.Head:Destroy()
 	end
-	
+
 	if plr.Character and plr.Character:FindFirstChild("Humanoid") then
-    plr.Character.Humanoid.Health = 0
-else
-    plr.CharacterAdded:Wait() -- Wait for character to load
-    local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
-    if humanoid then
-        humanoid.Health = 0
-    end
-end
+		plr.Character.Humanoid.Health = 0
+	else
+		plr.CharacterAdded:Wait() -- Wait for character to load
+		local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
+		if humanoid then
+			humanoid.Health = 0
+		end
+	end
 	game:GetService("RunService").PostSimulation:connect(function()
 		for i,v in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
 			if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
@@ -287,9 +302,9 @@ end
 				v.Volume = 0
 			end
 		end
-			
-			char.Humanoid.Health = 0
-		
+
+		char.Humanoid.Health = 0
+
 
 		FEScript(char)
 	end)
@@ -323,7 +338,7 @@ input.UserCFrameChanged:Connect(function(part, move)
 
 	pcall(function()
 		if part == Enum.UserCFrame.Head then
-					
+
 			headpart.CFrame = cam.CFrame * (CFrame.new(move.p * (cam.HeadScale - 1)) * move)
 			thirdpersonpart.CFrame = cam.CFrame * (CFrame.new(move.p * (cam.HeadScale - 1)) * move) * CFrame.new(0, 0, -10) * CFrame.Angles(math.rad(180), 0, math.rad(180))
 		elseif part == Enum.UserCFrame.LeftHand then
@@ -332,12 +347,19 @@ input.UserCFrameChanged:Connect(function(part, move)
 				math.rad(global.options.lefthandrotoffset.Y),
 				math.rad(global.options.lefthandrotoffset.Z)
 				))
+			
 
 			-- Distance check before interacting with an object
 			if lefttoyenable and lefttoypart then
 				local distance = (lefthandpart.Position - lefttoypart.Position).Magnitude
 				if distance <= pickupRange then
 					lefttoypart.CFrame = lefthandpart.CFrame * ltoypos
+				end
+			end
+			if lefttoyenable2 and lefttoypart2 then
+				local distance = (lefthandpart.Position - lefttoypart2.Position).Magnitude
+				if distance <= pickupRange then
+					lefttoypart2.CFrame = lefthandpart.CFrame * ltoypos2
 				end
 			end
 		elseif part == Enum.UserCFrame.RightHand then
@@ -352,6 +374,12 @@ input.UserCFrameChanged:Connect(function(part, move)
 				local distance = (righthandpart.Position - righttoypart.Position).Magnitude
 				if distance <= pickupRange then
 					righttoypart.CFrame = righthandpart.CFrame * rtoypos
+				end
+			end
+			if righttoyenable2 and righttoypart2 then
+				local distance = (righthandpart.Position - righttoypart2.Position).Magnitude
+				if distance <= pickupRange then
+					righttoypart2.CFrame = righthandpart.CFrame * rtoypos2
 				end
 			end
 		end
@@ -377,6 +405,16 @@ input.InputBegan:connect(function(key)
 		lfirst = false
 		lefttoyenable = not lefttoyenable
 	end
+	if key.KeyCode == global.options.leftToy2Bind then
+		if not lfirst2 then
+			if (lefthandpart.Position - lefttoypart2.Position).magnitude < 2 then
+				ltoypos2 = lefttoypart2.CFrame:ToObjectSpace(lefthandpart.CFrame):Inverse()
+			end
+
+		end
+		lfirst = false
+		lefttoyenable = not lefttoyenable
+	end
 	if key.KeyCode == global.options.rightToyBind then
 		if not rfirst then
 			if (righthandpart.Position - righttoypart.Position).magnitude < 2 then
@@ -386,6 +424,16 @@ input.InputBegan:connect(function(key)
 		end
 		rfirst = false
 		righttoyenable = not righttoyenable
+	end
+	if key.KeyCode == global.options.rightToy2Bind then
+		if not rfirst2 then
+			if (righthandpart.Position - righttoypart2.Position).magnitude < 2 then
+				rtoypos2 = righttoypart2.CFrame:ToObjectSpace(righthandpart.CFrame):Inverse()
+			end
+
+		end
+		rfirst2 = false
+		righttoyenable2 = not righttoyenable2
 	end
 end)
 

@@ -1,30 +1,4 @@
-getgenv().headhats = { ["meshid:132838737969402"] = CFrame.new(0, 0, 0),["meshid:17354939820"] = CFrame.new(0, 1.350000023841858, 0),["meshid:127552124837034"] = CFrame.new(0, -2, 0),}
-getgenv().right = "meshid:121304376791439"
-getgenv().left = "meshid:117287001096396"
-getgenv().HATDROP = false
-getgenv().fullbody = false
-getgenv().options = {
-	dontfling = false,
-	righthandrotoffset = Vector3.new(90, 0, 0),
-	lefthandrotoffset = Vector3.new(90, 0, 0),
-	headscale = 3,
-	rightleg = "",
-	leftleg = "",
-	rightlegrotoffset = Vector3.new(0, 0, 0),
-	leftlegrotoffset = Vector3.new(0, 0, 0),
-	NetVelocity = Vector3.new(35,55,35), -- if your hands and head keep falling set these to higher numbers
-	controllerRotationOffset = Vector3.new(180,180,0),
-	HeadHatTransparency = 1,
-	leftToyBind = Enum.KeyCode.ButtonY,
-	rightToyBind = Enum.KeyCode.ButtonB,
-	leftToy2Bind = Enum.KeyCode.ButtonX,
-	rightToy2Bind = Enum.KeyCode.ButtonA,
-	leftToy = "Accessory (SpongeBob Head)", -- default is "" or nil
-	rightToy = "meshid:18305889527", -- default is "" or nil
-	leftToy2 = "Accessory (Jake)", -- default is "" or nil
-	rightToy2 = "Accessory (tempristheadAccessory)", -- default is "" or nil
-}
-getgenv().skyVRversion = '3.0.0'
+
 
 -- sky vr
 
